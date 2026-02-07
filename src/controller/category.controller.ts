@@ -41,7 +41,9 @@ export async function createCategory(req: Request, res: Response, next: NextFunc
 export async function getCategories(req: Request, res: Response, next: NextFunction) {
     try {
         const categories = await Category.findAll({ raw: true });
+        console.log(categories)
         res.status(200).json({ status: 'success', data: categories });
+
     } catch (err) {
         console.log(err);
         res.status(400).json({ status: 'failed', message: 'Could not retrieve categories' });
