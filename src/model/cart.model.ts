@@ -17,7 +17,10 @@ export class Cart extends Model<CartAttributes> implements CartAttributes {
     public user_id!: number;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
+<<<<<<< HEAD
       declare product?: Product;
+=======
+>>>>>>> 14517d659aaf62f7cd84f27eff603630d000d39e
 }
 
 Cart.init(                         //Cart.init() is used to define the model (table structure).

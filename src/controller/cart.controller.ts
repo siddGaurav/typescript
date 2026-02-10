@@ -21,7 +21,11 @@ export const addToCart = async (req: RequestWithUser, res: Response, next: NextF
 
         if (existingItem) {
             // existingItem.product_qty += product_qty;
+<<<<<<< HEAD
             // console.log(existingItem)
+=======
+            console.log(existingItem)
+>>>>>>> 14517d659aaf62f7cd84f27eff603630d000d39e
             await Cart.update(
                 { product_qty: existingItem.product_qty + 1 },
                 { where: { id: existingItem.id } }

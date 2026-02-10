@@ -2,6 +2,7 @@ import type { NextFunction, Response } from "express";
 import { Order } from "../model/order.model.js";
 import type { RequestWithUser } from "../middleware/auth.js";
 import { validationResult } from "express-validator";
+<<<<<<< HEAD
 import { Cart } from "../model/cart.model.js";
 import { Product } from "../model/product.model.js";
 import { v4 as uuidv4 } from "uuid";
@@ -9,6 +10,9 @@ import { raw } from "mysql2";
 import { it } from "node:test";
 import { OrderDetails } from "../model/orderdetails.model.js";
 import { razorpay } from "../utils/RozarPay.js";
+=======
+
+>>>>>>> 14517d659aaf62f7cd84f27eff603630d000d39e
 
 export async function OrderData(
   req: RequestWithUser,
@@ -16,6 +20,7 @@ export async function OrderData(
   next: NextFunction
 ) {
   try {
+<<<<<<< HEAD
     // 1️⃣ Validation check
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -139,12 +144,22 @@ export async function OrderData(
 
     const order = await Order.create({
       user_id,
+=======
+
+
+    const {
+>>>>>>> 14517d659aaf62f7cd84f27eff603630d000d39e
       order_txn_id,
       order_total_amount,
       order_tax_amount,
       order_discount_amount,
+<<<<<<< HEAD
       order_coupon_code: order_coupon_code || null,
       order_payment_mode: paymentMode,
+=======
+      order_coupon_code,
+      order_payment_mode,
+>>>>>>> 14517d659aaf62f7cd84f27eff603630d000d39e
       order_status,
       order_address,
       order_totalItems,
@@ -153,6 +168,7 @@ export async function OrderData(
       zipCode,
       country,
       phoneNumber,
+<<<<<<< HEAD
       notes: notes || null,
     });
 
@@ -214,10 +230,28 @@ export async function OrderGet(req: RequestWithUser, res: Response, next: NextFu
       return res.status(400).json({
         status: false,
         message: "User id is required",
+=======
+      notes,
+    } = req.body;
+
+    const error = validationResult(req)
+    if (!error.isEmpty()) {
+      const msg = error.array().map(e => e.msg)
+      return res.status(400).json({ status: "failed", message: msg })
+    }
+
+
+    const user_id = req.user?.id;
+    if (!user_id) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized user",
+>>>>>>> 14517d659aaf62f7cd84f27eff603630d000d39e
       });
     }
 
 
+<<<<<<< HEAD
     const OrderData = await Order.findOne({
       where: { user_id: user_id },
     })
@@ -238,3 +272,49 @@ export async function OrderGet(req: RequestWithUser, res: Response, next: NextFu
   }
 
 }
+=======
+
+
+
+    // basic validation
+
+
+    const order = await Order.create({
+      user_id,
+      order_txn_id,
+      order_total_amount,
+      order_tax_amount,
+      order_discount_amount,
+      order_coupon_code,
+      order_payment_mode,
+      order_status,
+      order_address,
+      order_totalItems,
+      city,
+      state,
+      zipCode,
+      country,
+      phoneNumber,
+      notes,
+    });
+
+
+    res.status(201).json({ status: 'success', message: 'Product created', data: order });
+
+
+
+
+    // return res.status(201).json({
+    //   success: true,
+    //   message: "Order created successfully",
+    //   data: order,
+    // });
+  } catch (err) {
+    console.error("Order create error:", err);
+    next(err);
+  }
+}
+
+
+
+>>>>>>> 14517d659aaf62f7cd84f27eff603630d000d39e

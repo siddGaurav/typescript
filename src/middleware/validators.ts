@@ -81,7 +81,11 @@ export const createCartValidation: ValidationChain[] = [
 ];
 
 export const updateCartValidation: ValidationChain[] = [
+<<<<<<< HEAD
     body('product_qty')
+=======
+         body('product_qty')
+>>>>>>> 14517d659aaf62f7cd84f27eff603630d000d39e
         .notEmpty().withMessage('Product quantity is required')
         .isInt({ gt: 0 }).withMessage('Product quantity must be a positive integer'),
 ];
@@ -92,6 +96,7 @@ export const updateCartValidation: ValidationChain[] = [
 
 
 export const createOrderValidation: ValidationChain[] = [
+<<<<<<< HEAD
     body("order_txn_id")
         .notEmpty().withMessage("Order transaction ID is required")
         .bail()
@@ -141,12 +146,64 @@ export const createOrderValidation: ValidationChain[] = [
         .notEmpty().withMessage("Phone number is required")
         .bail()
         .isMobilePhone("en-IN").withMessage("Invalid phone number"),
+=======
+  body("order_txn_id")
+    .notEmpty().withMessage("Order transaction ID is required")
+    .bail()
+    .isString().withMessage("Order transaction ID must be a string"),
+
+  body("order_total_amount")
+    .notEmpty().withMessage("Order total amount is required")
+    .bail()
+    .isFloat({ gt: 0 }).withMessage("Order total amount must be greater than 0"),
+
+  body("order_payment_mode")
+    .notEmpty().withMessage("Payment mode is required")
+    .bail()
+    .isString().withMessage("Payment mode must be a string"),
+
+  body("order_status")
+    .notEmpty().withMessage("Order status is required")
+    .bail()
+    .isString().withMessage("Order status must be a string"),
+
+  body("order_address")
+    .notEmpty().withMessage("Order address is required")
+    .bail()
+    .isString().withMessage("Order address must be a string"),
+
+  body("city")
+    .notEmpty().withMessage("City is required")
+    .bail()
+    .isString().withMessage("City must be a string"),
+
+  body("state")
+    .notEmpty().withMessage("State is required")
+    .bail()
+    .isString().withMessage("State must be a string"),
+
+  body("zipCode")
+    .notEmpty().withMessage("Zip code is required")
+    .bail()
+    .isString().withMessage("Zip code must be a string"),
+
+  body("country")
+    .notEmpty().withMessage("Country is required")
+    .bail()
+    .isString().withMessage("Country must be a string"),
+
+  body("phoneNumber")
+    .notEmpty().withMessage("Phone number is required")
+    .bail()
+    .isMobilePhone("en-IN").withMessage("Invalid phone number"),
+>>>>>>> 14517d659aaf62f7cd84f27eff603630d000d39e
 ];
 
 
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -175,3 +232,5 @@ export const OrderCartValidation: ValidationChain[] = [
         .withMessage("Notes can be max 200 characters"),
 
 ]
+=======
+>>>>>>> 14517d659aaf62f7cd84f27eff603630d000d39e
