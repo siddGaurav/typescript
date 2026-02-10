@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { raw } from "mysql2";
 import { it } from "node:test";
 import { OrderDetails } from "../model/orderdetails.model.js";
+import { razorpay } from "../utils/RozarPay.js";
 
 export async function OrderData(
   req: RequestWithUser,
@@ -119,6 +120,23 @@ export async function OrderData(
     // })
 
 
+
+
+    const razorpayOrder = await razorpay.orders.create({
+      amount: Math.round(order_total_amount * 100), // amount in paise
+      currency: "INR",
+      receipt: order_txn_id,
+      payment_capture: true, // ✅ boolean
+    });
+
+
+
+
+
+
+
+
+
     const order = await Order.create({
       user_id,
       order_txn_id,
@@ -172,7 +190,8 @@ export async function OrderData(
         order_total_amount,
         order_totalItems,
         data: order,
-        products // 👈 yahan product name + image ja raha hai
+        products,
+        razorpay_order: razorpayOrder || null,
       }
 
     });
